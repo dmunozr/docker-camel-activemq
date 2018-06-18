@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>Proof of concept for: docker, Apache Camel and Apache ActiveMQ</name>
+
+    <groupId>com.test</groupId>
+    <artifactId>goals2018</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.surefire.version>2.18.1</maven.surefire.version>
+    </properties>
+
+
+    <dependencies>
+
+    </dependencies>
+
+    <scm>
+        <connection>scm:git:git@github.com:dmunozr/docker-camel-activemq.git</connection>
+        <developerConnection>scm:git:git@github.com:dmunozr/docker-camel-activemq.git</developerConnection>
+        <url>https://github.com/dmunozr/docker-camel-activemq</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <build>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.2</version>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <attachClasses>true</attachClasses>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <modules>
+        <!--
+        <module>example</module> -->
+    </modules>
+
+</project>
