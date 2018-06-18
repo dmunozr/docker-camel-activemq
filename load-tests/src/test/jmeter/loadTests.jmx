@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="4.0" jmeter="4.0 r1823414">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="General config" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="producer.host" elementType="Argument">
+            <stringProp name="Argument.name">producer.host</stringProp>
+            <stringProp name="Argument.value">${__property(producer.host,,localhost)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="producer.port" elementType="Argument">
+            <stringProp name="Argument.name">producer.port</stringProp>
+            <stringProp name="Argument.value">${__property(producer.host,,8080)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="producer.endpoint.path" elementType="Argument">
+            <stringProp name="Argument.name">producer.endpoint.path</stringProp>
+            <stringProp name="Argument.value">${__property(producer.endpoint.path,,/v1/requests)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="num.threads.by.group" elementType="Argument">
+            <stringProp name="Argument.name">num.threads.by.group</stringProp>
+            <stringProp name="Argument.value">${__property(num.threads.by.group,,1)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="ramp.up.period.seconds" elementType="Argument">
+            <stringProp name="Argument.name">ramp.up.period.seconds</stringProp>
+            <stringProp name="Argument.value">${__property(ramp.up.period.seconds,,3)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="loop.count.for.each.thread" elementType="Argument">
+            <stringProp name="Argument.name">loop.count.for.each.thread</stringProp>
+            <stringProp name="Argument.value">${__property(loop.count.for.each.thread,,1)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <threadCounts>true</threadCounts>
+            <sampleCount>true</sampleCount>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="1 – Create Car Budget Requests" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">${loop.count.for.each.thread}</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${num.threads.by.group}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${ramp.up.period.seconds}</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Post create endpoint ${__threadNum}" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+	&quot;requests&quot;: [{&#xd;
+			&quot;car&quot;: {&#xd;
+				&quot;brand&quot;: &quot;Peugeot&quot;,&#xd;
+				&quot;model&quot;: &quot;5008&quot;,&#xd;
+				&quot;version&quot;: &quot;GT Line&quot;,&#xd;
+				&quot;year&quot;: &quot;2017&quot;&#xd;
+			},&#xd;
+			&quot;client&quot;: {&#xd;
+				&quot;firstName&quot;: &quot;Daniel&quot;,&#xd;
+				&quot;lastName&quot;: &quot;Muñoz Rivas&quot;,&#xd;
+				&quot;telephone&quot;: &quot;690525252&quot;,&#xd;
+				&quot;email&quot;: &quot;daniel@gmail.com&quot;&#xd;
+			}&#xd;
+		},&#xd;
+		{&#xd;
+			&quot;car&quot;: {&#xd;
+				&quot;brand&quot;: &quot;Ford&quot;,&#xd;
+				&quot;model&quot;: &quot;Focus&quot;,&#xd;
+				&quot;version&quot;: &quot;Inspire&quot;,&#xd;
+				&quot;year&quot;: &quot;2012&quot;&#xd;
+			},&#xd;
+			&quot;client&quot;: {&#xd;
+				&quot;firstName&quot;: &quot;Nazareth&quot;,&#xd;
+				&quot;lastName&quot;: &quot;Jimenez Vela&quot;,&#xd;
+				&quot;telephone&quot;: &quot;610111111&quot;,&#xd;
+				&quot;email&quot;: &quot;nazareth@gmail.com&quot;&#xd;
+			}&#xd;
+		}&#xd;
+	]&#xd;
+}&#xd;
+</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${producer.host}</stringProp>
+          <stringProp name="HTTPSampler.port">${producer.port}</stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+          <stringProp name="HTTPSampler.path">${producer.endpoint.path}</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="OK Response Code" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49587">201</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">1</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

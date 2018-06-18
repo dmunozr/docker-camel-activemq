@@ -5,31 +5,31 @@ The design to implement is explained in the following sections. It does not foll
 ## Step 1: HTTP requests are received in a rest controller. The HTTP content will be a JSON containing some information about a client interested in a specific car.
 
 	{
-		"solicitudesInformacion": [{
-				"vehiculo": {
-					"marca": "Peugeot",
-					"modelo": "5008",
+		"requests": [{
+				"car": {
+					"brand": "Peugeot",
+					"model": "5008",
 					"version": "GT Line",
-					"anyo": "2017"
+					"year": "2017"
 				},
-				"cliente": {
-					"nombre": "Daniel",
-					"apellidos": "Muñoz Rivas",
-					"telefono": "690525252",
+				"client": {
+					"firstName": "Daniel",
+					"lastName": "Muñoz Rivas",
+					"telephone": "690525252",
 					"email": "daniel@gmail.com"
 				}
 			},
 			{
-				"vehiculo": {
-					"marca": "Ford",
-					"modelo": "Focus",
+				"car": {
+					"brand": "Ford",
+					"model": "Focus",
 					"version": "Inspire",
-					"anyo": "2012"
+					"year": "2012"
 				},
-				"cliente": {
-					"nombre": "Nazareth",
-					"apellidos": "Jimenez Vela",
-					"telefono": "610111111",
+				"client": {
+					"firstName": "Nazareth",
+					"lastName": "Jimenez Vela",
+					"telephone": "610111111",
 					"email": "nazareth@gmail.com"
 				}
 			}
@@ -49,19 +49,19 @@ The design to implement is explained in the following sections. It does not foll
 		The output of this process will be a set of messages like this:
 
 		{
-			"vehiculo": {
-				"marca": "Peugeot",
-				"modelo": "5008",
-				"version": "GT Line",
-				"anyo": "2017"
-			},
-			"cliente": {
-				"nombre": "Daniel",
-				"apellidos": "Muñoz Rivas",
-				"telefono": "690525252",
-				"email": "daniel@gmail.com"
-			}
-		}
+            "car": {
+                "brand": "Peugeot",
+                "model": "5008",
+                "version": "GT Line",
+                "year": "2017"
+            },
+            "client": {
+                "firstName": "Daniel",
+                "lastName": "Muñoz Rivas",
+                "telephone": "690525252",
+                "email": "daniel@gmail.com"
+            }
+        }
 
 * Enrich every message so the message header "sponsorId" is included as part of the JSON content. For example:
 
@@ -69,18 +69,18 @@ The design to implement is explained in the following sections. It does not foll
 			"transactionInfo": {
 				"sponsorId": "www.coches.net"
 			},
-			"vehiculo": {
-				"marca": "Peugeot",
-				"modelo": "5008",
-				"version": "GT Line",
-				"anyo": "2017"
-			},
-			"cliente": {
-				"nombre": "Daniel",
-				"apellidos": "Muñoz Rivas",
-				"telefono": "690525252",
-				"email": "daniel@gmail.com"
-			}
+            "car": {
+                "brand": "Peugeot",
+                "model": "5008",
+                "version": "GT Line",
+                "year": "2017"
+            },
+            "client": {
+                "firstName": "Daniel",
+                "lastName": "Muñoz Rivas",
+                "telephone": "690525252",
+                "email": "daniel@gmail.com"
+            }
 		}
 
 * Include the minimum and maximum price for the requested car and which is the availability level for every request:
@@ -88,24 +88,22 @@ The design to implement is explained in the following sections. It does not foll
 		{
 			"transactionInfo": {
 				"sponsorId": "www.coches.net"
-			},
-			"additionalInfo": {
 				"minPrice": 25.000,
 				"maxPrice": 33.000,
 				"availability": "HIGH"
 			},
-			"vehiculo": {
-				"marca": "Peugeot",
-				"modelo": "5008",
-				"version": "GT Line",
-				"anyo": "2017"
-			},
-			"cliente": {
-				"nombre": "Daniel",
-				"apellidos": "Muñoz Rivas",
-				"telefono": "690525252",
-				"email": "daniel@gmail.com"
-			}
+            "car": {
+                "brand": "Peugeot",
+                "model": "5008",
+                "version": "GT Line",
+                "year": "2017"
+            },
+            "client": {
+                "firstName": "Daniel",
+                "lastName": "Muñoz Rivas",
+                "telephone": "690525252",
+                "email": "daniel@gmail.com"
+            }
 		}
 
 ## Step 6: The message is sent to the topic "requestsProcessed" so lots of cars dealerships are notified about the sales opportunity.

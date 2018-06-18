@@ -58,8 +58,9 @@
     </build>
 
     <modules>
-        <!--
-        <module>example</module> -->
+        <module>model</module>
+        <module>producer</module>
+        <module>load-tests</module>
     </modules>
 
 </project>
