@@ -6,6 +6,7 @@ package com.demo.camel;
 import com.demo.dto.CarBudgetsRequest;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.model.rest.RestBindingMode;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MimeTypeUtils;
 
@@ -16,6 +17,7 @@ public class CarBudgetsRequestToQueueRoute extends RouteBuilder {
     public void configure() {
         rest("/v1/requests")
             .post()
+            .bindingMode(RestBindingMode.json)
             .type(CarBudgetsRequest.class)
             .consumes(MimeTypeUtils.APPLICATION_JSON_VALUE)
             .to("log:com.mycompany.order?level=DEBUG");
