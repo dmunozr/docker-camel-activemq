@@ -17,9 +17,7 @@
         <maven.surefire.version>2.18.1</maven.surefire.version>
     </properties>
 
-
     <dependencies>
-
     </dependencies>
 
     <scm>

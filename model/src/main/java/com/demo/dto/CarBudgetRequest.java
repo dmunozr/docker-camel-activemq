@@ -1,7 +1,7 @@
 /*
  * All rights reserved. Copyright (c) Ixxus Ltd 2017
  */
-package com.test.dto;
+package com.demo.dto;
 
 public class CarBudgetRequest {
 

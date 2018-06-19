@@ -12,16 +12,20 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.4.RELEASE</version>
+        <version>1.5.1.RELEASE</version>
         <relativePath />
     </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <start-class>com.test.Application</start-class>
+        <start-class>com.demo.ProducerApplication</start-class>
         <java.version>1.8</java.version>
         <springboot.version>1.4.4.RELEASE</springboot.version>
         <jvm.props>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005</jvm.props>
+        <activemq.version>5.15.4</activemq.version>
+        <camel.version>2.18.5</camel.version>
+        <spring.version>4.3.6.RELEASE</spring.version>
+        <spring.boot.version>1.5.1.RELEASE</spring.boot.version>
     </properties>
 
     <dependencies>
@@ -35,7 +39,71 @@
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+
+        <!-- Apache Camel -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-stream</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jms</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+
+        <!-- Camel Restlet -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-restlet</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-restlet-starter</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.restlet.jee</groupId>
+            <artifactId>org.restlet.ext.spring</artifactId>
+            <version>2.3.5</version>
+        </dependency>
+
+        <!-- Apache ActiveMQ -->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-camel</artifactId>
+            <version>${activemq.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-pool</artifactId>
+            <version>${activemq.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-messaging</artifactId>
+            <version>5.0.7.RELEASE</version>
+        </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>spring-repo</id>
+            <name>Spring Repository</name>
+            <url>http://repo.spring.io/plugins-release</url>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>
@@ -45,6 +113,7 @@
                 <version>${springboot.version}</version>
                 <!-- Comment this if you want to disable debug -->
                 <configuration>
+                    <mainClass>org.apache.camel.spring.boot.FatJarRouter</mainClass>
                     <jvmArguments>
                         ${jvm.props}
                     </jvmArguments>
@@ -52,7 +121,7 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>build-info</goal>
+                            <goal>repackage</goal>
                         </goals>
                     </execution>
                 </executions>
