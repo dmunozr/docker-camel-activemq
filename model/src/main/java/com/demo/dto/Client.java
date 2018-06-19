@@ -3,9 +3,11 @@
  */
 package com.demo.dto;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Client {
+public class Client implements Serializable {
 
     @JsonProperty
     String firstName;

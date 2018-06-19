@@ -1,9 +1,10 @@
 package com.demo.dto;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum Availability {
+public enum Availability implements Serializable {
 
     LOW("low"),
     MEDIUM("medium"),

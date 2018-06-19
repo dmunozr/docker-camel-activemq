@@ -20,7 +20,7 @@ public class CarBudgetsRequestToQueueRoute extends RouteBuilder {
             .bindingMode(RestBindingMode.json)
             .type(CarBudgetsRequest.class)
             .consumes(MimeTypeUtils.APPLICATION_JSON_VALUE)
-            .to("log:com.mycompany.order?level=DEBUG");
+            .to("jms:requestsToProcess?exchangePattern=InOnly");
     }
 
 }

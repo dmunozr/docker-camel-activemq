@@ -3,9 +3,11 @@
  */
 package com.demo.dto;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Car {
+public class Car implements Serializable {
 
     @JsonProperty
     String brand;
