@@ -5,7 +5,9 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.demo</groupId>
     <artifactId>producer</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
     <description>Spring Boot base web application to receive new message requests</description>
 

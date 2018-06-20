@@ -1,0 +1,23 @@
+version: '2.2'
+services:
+  activemq:
+    container_name: activemq
+    image: webcenter/activemq:latest
+    ports:
+      - "8161:8161"
+      - "61616:61616"
+    expose:
+      - "8161"
+      - "61616"
+      - "61613"
+  producer:
+    container_name: producer
+    build:
+      context: .
+      dockerfile: producer/Dockerfile
+    image: producer
+    ports:
+      - "8080:8080"
+    depends_on:
+      activemq:
+        condition: service_started
