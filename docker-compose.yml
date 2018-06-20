@@ -18,6 +18,19 @@ services:
     image: producer
     ports:
       - "8080:8080"
+      - "5005:5005"
+    depends_on:
+      activemq:
+        condition: service_started
+  consumer:
+    container_name: consumer
+    build:
+      context: .
+      dockerfile: consumer/Dockerfile
+    image: consumer
+    ports:
+      - "8081:8080"
+      - "5006:5005"
     depends_on:
       activemq:
         condition: service_started
