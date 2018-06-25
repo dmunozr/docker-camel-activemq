@@ -22,7 +22,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <start-class>com.demo.ConsumerApplication</start-class>
         <java.version>1.8</java.version>
-        <springboot.version>1.4.4.RELEASE</springboot.version>
+        <springboot.version>1.5.1.RELEASE</springboot.version>
         <jvm.props>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005</jvm.props>
         <activemq.version>5.15.4</activemq.version>
         <camel.version>2.18.5</camel.version>
