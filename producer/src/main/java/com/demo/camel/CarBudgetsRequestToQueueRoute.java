@@ -14,7 +14,7 @@ import org.springframework.util.MimeTypeUtils;
 @Component
 public class CarBudgetsRequestToQueueRoute extends RouteBuilder {
 
-    @Value("requestsToProcess.queue.name")
+    @Value("${requestsToProcess.queue.name}")
     private String requestsToProcessQueueName;
 
     @Override

@@ -60,6 +60,7 @@
         <module>model</module>
         <module>producer</module>
         <module>consumer</module>
+        <module>final-consumer</module>
         <module>load-tests</module>
     </modules>
 

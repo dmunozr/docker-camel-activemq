@@ -23,19 +23,19 @@ build_consumer() {
 }
 
 build_final_consumer() {
-    docker-compose stop final_consumer
-    docker-compose rm -f final_consumer
+    docker-compose stop final-consumer
+    docker-compose rm -f final-consumer
     mvn clean install -pl final-consumer -DskipTests=true
-    docker-compose build --no-cache final_consumer
+    docker-compose build --no-cache final-consumer
 }
 
 build() {
     docker-compose stop producer
     docker-compose stop consumer
-    docker-compose stop final_consumer
+    docker-compose stop final-consumer
     docker-compose rm -f producer
     docker-compose rm -f consumer
-    docker-compose rm -f final_consumer
+    docker-compose rm -f final-consumer
     mvn clean install -DskipTests=true
     docker-compose build --no-cache
 }

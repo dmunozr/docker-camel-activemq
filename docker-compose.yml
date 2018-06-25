@@ -34,3 +34,15 @@ services:
     depends_on:
       activemq:
         condition: service_started
+  final-consumer:
+    container_name: final-consumer
+    build:
+      context: .
+      dockerfile: final-consumer/Dockerfile
+    image: final-consumer
+    ports:
+      - "8082:8080"
+      - "5007:5005"
+    depends_on:
+      activemq:
+        condition: service_started
