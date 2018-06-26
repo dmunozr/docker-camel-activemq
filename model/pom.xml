@@ -5,13 +5,13 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.com.demo</groupId>
+    <groupId>com.demo</groupId>
     <artifactId>model</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <parent>
         <artifactId>goals2018</artifactId>
-        <groupId>com.test</groupId>
+        <groupId>com.demo</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 

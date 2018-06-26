@@ -1,13 +1,10 @@
-/*
- * All rights reserved. Copyright (c) Ixxus Ltd 2017
- */
 package com.demo.dto;
 
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class TransactionInfo implements Serializable {
+public class TransactionInfo extends BaseObject implements Serializable {
 
     @JsonProperty
     String sponsorId;

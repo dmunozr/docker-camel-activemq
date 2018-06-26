@@ -1,22 +1,16 @@
-/*
- * All rights reserved. Copyright (c) Ixxus Ltd 2017
- */
-package com.demo.camel;
+package com.demo.camel.route;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProcessCarBudgetsRequestsAndSendMessagesToTheTopicRoute extends RouteBuilder {
+public class ProcessRequestsAndSendMessagesToTheTopicRoute extends RouteBuilder {
 
     public static final String ROUTE_ID = "processCarBudgetsRequestsAndSendThemToTopic";
 
     @Value("${requestsToProcess.queue.name}")
     private String requestsToProcessQueueName;
-
-    @Value("${requestsProcessed.topic.name}")
-    private String requestsProcessedTopicName;
 
     @Override
     public void configure() {
@@ -25,7 +19,7 @@ public class ProcessCarBudgetsRequestsAndSendMessagesToTheTopicRoute extends Rou
             .split()
             .jsonpath("$.requests.*")
             .log("${body}")
-            .to("activemq:topic:" + requestsProcessedTopicName);
+            .to(EnrichAndSendMessageRoute.ROUTE_URI);
     }
 
 }

@@ -5,7 +5,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.com.demo</groupId>
+    <groupId>com.demo</groupId>
     <artifactId>producer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
@@ -23,8 +23,10 @@
         <start-class>com.demo.ProducerApplication</start-class>
         <java.version>1.8</java.version>
         <springboot.version>1.5.1.RELEASE</springboot.version>
-        <jvm.props>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005</jvm.props>
+        <jvm.props>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005</jvm.props>
+        <jms.version>2.0</jms.version>
         <activemq.version>5.15.4</activemq.version>
+        <activemq.core.version>5.7.0</activemq.core.version>
         <camel.version>2.18.5</camel.version>
         <spring.version>4.3.6.RELEASE</spring.version>
         <spring.boot.version>1.5.1.RELEASE</spring.boot.version>
@@ -36,7 +38,7 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.test</groupId>
+            <groupId>com.demo</groupId>
             <artifactId>model</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
@@ -101,6 +103,13 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-messaging</artifactId>
             <version>5.0.7.RELEASE</version>
+        </dependency>
+
+        <!-- JMS -->
+        <dependency>
+            <groupId>javax.jms</groupId>
+            <artifactId>jms</artifactId>
+            <version>${jms.version}</version>
         </dependency>
     </dependencies>
 

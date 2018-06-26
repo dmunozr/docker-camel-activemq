@@ -1,16 +1,16 @@
-/*
- * All rights reserved. Copyright (c) Ixxus Ltd 2017
- */
 package com.demo.dto;
 
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CarBudgetRequest implements Serializable {
+public class CarBudgetRequest extends BaseObject implements Serializable {
 
     @JsonProperty
     private TransactionInfo transactionInfo;
+
+    @JsonProperty
+    private AdditionalInfo additionalInfo;
 
     @JsonProperty
     private Car car;
@@ -24,6 +24,14 @@ public class CarBudgetRequest implements Serializable {
 
     public void setTransactionInfo(final TransactionInfo transactionInfo) {
         this.transactionInfo = transactionInfo;
+    }
+
+    public AdditionalInfo getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(final AdditionalInfo additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 
     public Car getCar() {

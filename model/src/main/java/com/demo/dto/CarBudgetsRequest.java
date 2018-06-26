@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CarBudgetsRequest implements Serializable {
+public class CarBudgetsRequest extends BaseObject implements Serializable {
 
     @JsonProperty
     private List<CarBudgetRequest> requests;

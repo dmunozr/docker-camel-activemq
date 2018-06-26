@@ -1,25 +1,22 @@
-/*
- * All rights reserved. Copyright (c) Ixxus Ltd 2017
- */
 package com.demo.dto;
 
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Client implements Serializable {
+public class Client extends BaseObject implements Serializable {
 
     @JsonProperty
-    String firstName;
+    private String firstName;
 
     @JsonProperty
-    String lastName;
+    private String lastName;
 
     @JsonProperty
-    String telephone;
+    private String telephone;
 
     @JsonProperty
-    String email;
+    private String email;
 
     public String getFirstName() {
         return firstName;

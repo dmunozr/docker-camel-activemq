@@ -11,13 +11,15 @@
         <property name="brokerURL" value="${activeMQ.broker.url}" />
         <property name="userName" value="${activeMQ.jms.user}" />
         <property name="password" value="${activeMQ.jms.password}" />
+        <!-- NOTE: The following configuration is need we use some custom classes for the JMSMessage body.
+            In the current version we are using JSON as plain text.
         <property name="trustedPackages">
             <list>
                 <value>com.demo.dto</value>
                 <value>java.util</value>
                 <value>java.lang</value>
             </list>
-        </property>
+        </property> -->
     </bean>
     <bean id="jmsConfig" class="org.apache.camel.component.jms.JmsConfiguration">
         <property name="connectionFactory" ref="pooledConnectionFactory" />

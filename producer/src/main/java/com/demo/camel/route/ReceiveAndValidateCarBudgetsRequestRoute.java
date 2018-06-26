@@ -1,7 +1,7 @@
 /*
  * All rights reserved. Copyright (c) Ixxus Ltd 2017
  */
-package com.demo.camel;
+package com.demo.camel.route;
 
 import com.demo.dto.CarBudgetsRequest;
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.MimeTypeUtils;
 
 @Component
-public class CarBudgetsRequestToQueueRoute extends RouteBuilder {
+public class ReceiveAndValidateCarBudgetsRequestRoute extends RouteBuilder {
 
     @Value("${requestsToProcess.queue.name}")
     private String requestsToProcessQueueName;
@@ -24,7 +24,7 @@ public class CarBudgetsRequestToQueueRoute extends RouteBuilder {
             .bindingMode(RestBindingMode.json)
             .type(CarBudgetsRequest.class)
             .consumes(MimeTypeUtils.APPLICATION_JSON_VALUE)
-            .to("jms:" + requestsToProcessQueueName + "?exchangePattern=InOnly");
+            .to(CheckSponsorHeaderAndMarshalAndSendToQueueRoute.ROUTE_URI);
     }
 
 }

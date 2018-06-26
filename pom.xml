@@ -5,7 +5,7 @@
 
     <name>Proof of concept for: docker, Apache Camel and Apache ActiveMQ</name>
 
-    <groupId>com.test</groupId>
+    <groupId>com.demo</groupId>
     <artifactId>goals2018</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>

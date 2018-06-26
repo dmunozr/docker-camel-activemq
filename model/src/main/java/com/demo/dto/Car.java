@@ -1,25 +1,22 @@
-/*
- * All rights reserved. Copyright (c) Ixxus Ltd 2017
- */
 package com.demo.dto;
 
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Car implements Serializable {
+public class Car extends BaseObject implements Serializable {
 
     @JsonProperty
-    String brand;
+    private String brand;
 
     @JsonProperty
-    String model;
+    private String model;
 
     @JsonProperty
-    String version;
+    private String version;
 
     @JsonProperty
-    Short year;
+    private Short year;
 
     public String getBrand() {
         return brand;

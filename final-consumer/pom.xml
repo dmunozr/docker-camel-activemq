@@ -36,7 +36,7 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.test</groupId>
+            <groupId>com.demo</groupId>
             <artifactId>model</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
