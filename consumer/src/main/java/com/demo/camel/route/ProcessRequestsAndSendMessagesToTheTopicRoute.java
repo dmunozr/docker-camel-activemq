@@ -1,5 +1,6 @@
 package com.demo.camel.route;
 
+import org.apache.camel.ExchangePattern;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -18,8 +19,9 @@ public class ProcessRequestsAndSendMessagesToTheTopicRoute extends RouteBuilder 
             .routeId(ROUTE_ID)
             .split()
             .jsonpath("$.requests.*")
-            .log("${body}")
-            .to(EnrichAndSendMessageRoute.ROUTE_URI);
+            .log("Processing the message: ${body}")
+            .to(EnrichAndSendMessageRoute.ROUTE_URI)
+            .setExchangePattern(ExchangePattern.InOnly);
     }
 
 }

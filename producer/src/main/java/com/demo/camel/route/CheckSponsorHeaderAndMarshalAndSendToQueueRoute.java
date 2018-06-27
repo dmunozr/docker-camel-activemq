@@ -4,6 +4,7 @@
 package com.demo.camel.route;
 
 import org.apache.camel.Exchange;
+import org.apache.camel.ExchangePattern;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.camel.spring.SpringRouteBuilder;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,7 +31,8 @@ public class CheckSponsorHeaderAndMarshalAndSendToQueueRoute extends SpringRoute
                 .when(header(sponsorIdHeaderName).isNotNull())
                     .marshal()
                     .json(JsonLibrary.Jackson)
-                    .to("activemq:" + requestsToProcessQueueName + "?exchangePattern=InOnly")
+                    .to("activemq:" + requestsToProcessQueueName)
+                    .setExchangePattern(ExchangePattern.InOnly)
                 .otherwise()
                     .setBody(constant("HTTP request must contain the header '" + sponsorIdHeaderName + "'"))
                     .setHeader(Exchange.HTTP_RESPONSE_CODE, constant(400))

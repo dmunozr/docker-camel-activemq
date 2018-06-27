@@ -3,8 +3,10 @@
  */
 package com.demo.camel.route;
 
-import org.apache.camel.ExchangePattern;
+import com.demo.filter.CarBrandFilter;
+
 import org.apache.camel.builder.RouteBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -13,20 +15,21 @@ public class ProcessCarBudgetsRequestsProcessedAndStoreThemInDiskRoute extends R
 
     public static final String ROUTE_ID = "processCarBudgetsRequestsAndSendThemToTopic";
 
-    @Value("${car.brand.header.name}")
-    private String carBrandHeaderName;
-
     @Value("${requestsProcessed.topic.name}")
     private String requestsProcessedTopicName;
+
+    @Value("${container.name}")
+    private String containerName;
+
+    @Autowired
+    private CarBrandFilter carBrandFilter;
 
     @Override
     public void configure() {
         from("activemq:topic:" + requestsProcessedTopicName)
             .routeId(ROUTE_ID)
-            .log("Final1: ${body}")
-            .filter(header(carBrandHeaderName).isEqualTo("Peugeot"))
-            .log("Final2: ${body}")
-            .setExchangePattern(ExchangePattern.InOnly);
+            .filter().method(carBrandFilter, "filter")
+            .log("Processed by " + containerName + ": ${body}");
     }
 
 }

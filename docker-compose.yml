@@ -40,6 +40,9 @@ services:
     ports:
       - "8082:8080"
       - "5007:5005"
+    environment:
+      - CAR_BRAND=peugeot,ford
+      - CONTAINER_NAME=final-consumer-1
     depends_on:
       activemq:
         condition: service_started
