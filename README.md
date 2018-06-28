@@ -208,7 +208,7 @@ At this point, we are done. We finish the process writing the message into the l
         }
     }
 
-#How to start up the environment using Docker.
+# How to start up the environment using Docker.
 
 Clone the repository in your local machine and execute the following command from the main directory:
 
@@ -223,7 +223,7 @@ This command will start an instance of each container:
  
 You can invoke the entry endpoint easily by using the JMeter [load-test](https://github.com/dmunozr/docker-camel-activemq/blob/master/load-tests/src/test/jmeter/loadTests.jmx).
 
-#Clustering
+## Clustering
 
 If you prefer to test the applications under a cluster environment, you can test it by executing the following command instead:
 
@@ -234,5 +234,5 @@ This command ends up using another docker compose configuration ([docker-cluster
 * 1 instance of the Producer application
 * 2 instances of the Consumer application
 * 2 instances of the Final-Consumer application
-    * One of them is configured to listen messages containing the brand "Peugeot"
+    * One of them is configured to listen messages containing the brands "Peugeot"
     * The other one listens messages containing the brand "Ford"
