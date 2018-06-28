@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EnrichHandleCarBudgetRequestHandler {
+public class EnrichCarBudgetRequestHandler {
 
     private static final float MIN_PRICE = 20000;
     private static final float MIN_PRICE_LIMIT = 50000;

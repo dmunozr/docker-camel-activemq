@@ -1,6 +1,6 @@
 package com.demo.camel.route;
 
-import com.demo.camel.handle.EnrichHandleCarBudgetRequestHandler;
+import com.demo.camel.handle.EnrichCarBudgetRequestHandler;
 import com.demo.dto.CarBudgetRequest;
 
 import org.apache.camel.ExchangePattern;
@@ -23,14 +23,14 @@ public class EnrichAndSendMessageRoute extends RouteBuilder {
     private String requestsProcessedTopicName;
 
     @Autowired
-    private EnrichHandleCarBudgetRequestHandler enrichHandleCarBudgetRequestHandler;
+    private EnrichCarBudgetRequestHandler enrichCarBudgetRequestHandler;
 
     @Override
     public void configure() {
         from(ROUTE_URI)
             .id(ROUTE_ID)
             .unmarshal(jsonDataFormat)
-            .bean(enrichHandleCarBudgetRequestHandler)
+            .bean(enrichCarBudgetRequestHandler)
             .marshal()
             .json(JsonLibrary.Jackson)
             .log("Sending message to the topic '" + requestsProcessedTopicName + "': ${body}")
