@@ -8,6 +8,7 @@ import org.apache.camel.ExchangePattern;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.camel.spring.SpringRouteBuilder;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -34,9 +35,10 @@ public class CheckSponsorHeaderAndMarshalAndSendToQueueRoute extends SpringRoute
                     .log("Sending message to the queue '"+requestsToProcessQueueName+"': ${body}")
                     .setExchangePattern(ExchangePattern.InOnly)
                     .to("activemq:" + requestsToProcessQueueName)
+                    .setBody(simple("Budgets request processed successfully!"))
                 .otherwise()
-                    .setBody(constant("HTTP request must contain the header '" + sponsorIdHeaderName + "'"))
-                    .setHeader(Exchange.HTTP_RESPONSE_CODE, constant(400))
+                    .setBody(simple("HTTP request must contain the header '" + sponsorIdHeaderName + "'"))
+                    .setHeader(Exchange.HTTP_RESPONSE_CODE, constant(HttpStatus.BAD_REQUEST))
             .endChoice();
         // @formatter:on
     }
