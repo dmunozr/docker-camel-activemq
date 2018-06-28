@@ -1,6 +1,3 @@
-/*
- * All rights reserved. Copyright (c) Ixxus Ltd 2017
- */
 package com.demo.camel.processor;
 
 import java.io.IOException;

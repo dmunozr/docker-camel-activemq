@@ -1,6 +1,3 @@
-/*
- * All rights reserved. Copyright (c) Ixxus Ltd 2017
- */
 package com.demo.camel.component;
 
 import static com.demo.camel.component.ImgFinderConstants.RESULT_HEADER_NAME;

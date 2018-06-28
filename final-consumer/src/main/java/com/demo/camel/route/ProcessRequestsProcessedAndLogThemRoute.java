@@ -1,6 +1,3 @@
-/*
- * All rights reserved. Copyright (c) Ixxus Ltd 2017
- */
 package com.demo.camel.route;
 
 import static com.demo.camel.processor.AddCarInformationAsHeaderProcessor.QUERY_HEADER_NAME;
