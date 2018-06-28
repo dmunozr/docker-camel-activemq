@@ -12,13 +12,16 @@ public class ProcessRequestsAndSendMessagesToTheTopicRoute extends RouteBuilder 
     @Value("${requestsToProcess.queue.name}")
     private String requestsToProcessQueueName;
 
+    @Value("${container.name}")
+    private String containerName;
+
     @Override
     public void configure() {
         from("activemq:" + requestsToProcessQueueName)
             .routeId(ROUTE_ID)
             .split()
             .jsonpath("$.requests.*")
-            .log("Processing the message: ${body}")
+            .log("Processing message by '" + containerName + "': ${body}")
             .to(EnrichAndSendMessageRoute.ROUTE_URI);
     }
 

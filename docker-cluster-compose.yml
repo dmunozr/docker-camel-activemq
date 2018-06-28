@@ -1,0 +1,77 @@
+version: '2.1'
+services:
+  activemq:
+    container_name: activemq
+    image: webcenter/activemq:latest
+    ports:
+      - "8161:8161"
+      - "61616:61616"
+    expose:
+      - "8161"
+      - "61616"
+      - "61613"
+  producer:
+    container_name: producer
+    build:
+      context: ./producer
+    image: producer
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    depends_on:
+      activemq:
+        condition: service_started
+  consumer-1:
+    container_name: consumer-1
+    build:
+      context: ./consumer
+    image: consumer
+    ports:
+      - "18080:8080"
+      - "15005:5005"
+    environment:
+      - CONTAINER_NAME=consumer-1
+    depends_on:
+      activemq:
+        condition: service_started
+  consumer-2:
+    container_name: consumer-2
+    build:
+      context: ./consumer
+    image: consumer
+    ports:
+      - "18081:8080"
+      - "15006:5005"
+    environment:
+      - CONTAINER_NAME=consumer-2
+    depends_on:
+      activemq:
+        condition: service_started
+  final-consumer-1:
+    container_name: final-consumer-1
+    build:
+      context: ./final-consumer
+    image: final-consumer
+    ports:
+      - "28080:8080"
+      - "25005:5005"
+    environment:
+      - CAR_BRAND=peugeot
+      - CONTAINER_NAME=final-consumer-1
+    depends_on:
+      activemq:
+        condition: service_started
+  final-consumer-2:
+    container_name: final-consumer-2
+    build:
+      context: ./final-consumer
+    image: final-consumer
+    ports:
+      - "28081:8080"
+      - "25006:5005"
+    environment:
+      - CAR_BRAND=ford
+      - CONTAINER_NAME=final-consumer-2
+    depends_on:
+      activemq:
+        condition: service_started

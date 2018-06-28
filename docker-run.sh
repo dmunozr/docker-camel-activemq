@@ -44,6 +44,35 @@ tail() {
     docker-compose logs -f
 }
 
+cluster_build() {
+    docker-compose -f docker-cluster-compose.yml stop producer
+    docker-compose -f docker-cluster-compose.yml stop consumer-1
+    docker-compose -f docker-cluster-compose.yml stop consumer-2
+    docker-compose -f docker-cluster-compose.yml stop final-consumer-1
+    docker-compose -f docker-cluster-compose.yml stop final-consumer-2
+    docker-compose -f docker-cluster-compose.yml rm -f producer
+    docker-compose -f docker-cluster-compose.yml rm -f consumer-1
+    docker-compose -f docker-cluster-compose.yml rm -f consumer-2
+    docker-compose -f docker-cluster-compose.yml rm -f final-consumer-1
+    docker-compose -f docker-cluster-compose.yml rm -f final-consumer-2
+
+    mvn clean install -DskipTests=true
+    docker-compose -f docker-cluster-compose.yml build --no-cache
+}
+
+cluster_start() {
+    docker-compose -f docker-cluster-compose.yml up -d
+}
+
+cluster_down() {
+    docker-compose -f docker-cluster-compose.yml down
+}
+
+cluster_tail() {
+    docker-compose -f docker-cluster-compose.yml logs -f
+}
+
+
 case "$1" in
   build_start)
     down
@@ -76,6 +105,22 @@ case "$1" in
   tail)
     tail
     ;;
+  cluster_build_start)
+    cluster_down
+    cluster_build
+    cluster_start
+    cluster_tail
+    ;;
+  cluster_start)
+    cluster_start
+    cluster_tail
+    ;;
+  cluster_down)
+    cluster_down
+    ;;
+  cluster_tail)
+    cluster_tail
+    ;;
   *)
-    echo "Usage: $0 {build_start|build_producer_start|build_consumer_start|build_final_consumer_start|start|stop|tail}"
+    echo "Usage: $0 {build_start|build_producer_start|build_consumer_start|build_final_consumer_start|start|stop|tail|cluster_build_start|cluster_start|cluster_down|cluster_tail}"
 esac
