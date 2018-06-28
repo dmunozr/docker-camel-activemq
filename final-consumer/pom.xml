@@ -49,6 +49,13 @@
             <version>3.7</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
+
         <!-- Apache Camel -->
         <dependency>
             <groupId>org.apache.camel</groupId>
@@ -78,7 +85,7 @@
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-jsonpath</artifactId>
-            <version>2.19.0</version>
+            <version>${camel.version}</version>
         </dependency>
 
         <!-- Apache ActiveMQ -->
@@ -101,6 +108,12 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-spring-boot</artifactId>
             <version>${camel.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.11.3</version>
         </dependency>
     </dependencies>
 

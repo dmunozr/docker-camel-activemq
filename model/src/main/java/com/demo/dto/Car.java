@@ -18,6 +18,9 @@ public class Car extends BaseObject implements Serializable {
     @JsonProperty
     private Short year;
 
+    @JsonProperty
+    private String imageUrl;
+
     public String getBrand() {
         return brand;
     }
@@ -48,5 +51,13 @@ public class Car extends BaseObject implements Serializable {
 
     public void setYear(final Short year) {
         this.year = year;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(final String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

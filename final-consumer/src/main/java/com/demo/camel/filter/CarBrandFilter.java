@@ -1,4 +1,4 @@
-package com.demo.filter;
+package com.demo.camel.filter;
 
 import java.util.Set;
 

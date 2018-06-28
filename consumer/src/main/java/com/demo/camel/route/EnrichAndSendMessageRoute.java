@@ -36,9 +36,9 @@ public class EnrichAndSendMessageRoute extends RouteBuilder {
             .bean(enrichHandleCarBudgetRequestHandler)
             .marshal()
             .json(JsonLibrary.Jackson)
-            .log("${body}")
-            .to("activemq:topic:" + requestsProcessedTopicName)
-            .setExchangePattern(ExchangePattern.InOnly);
+            .log("Sending message to the topic '" + requestsProcessedTopicName + "': ${body}")
+            .setExchangePattern(ExchangePattern.InOnly)
+            .to("activemq:topic:" + requestsProcessedTopicName);
     }
 
 }
