@@ -59,10 +59,10 @@ The JMeter suite includes just one test which is basically a HTTP POST sample li
                     "year": "2012"
                 },
                 "client": {
-                    "firstName": "Nazareth",
-                    "lastName": "Jimenez Vela",
+                    "firstName": "Maria",
+                    "lastName": "Moreno Reina",
                     "telephone": "610111111",
-                    "email": "nazareth@gmail.com"
+                    "email": "maria@gmail.com"
                 }
             }
         ]
@@ -100,10 +100,10 @@ If the HTTP request is valid, then a message is sent to a **queue** of ActiveMQ 
                 "year": 2012
             },
             "client": {
-                "firstName": "Nazareth",
-                "lastName": "Jimenez Vela",
+                "firstName": "Maria",
+                "lastName": "Moreno Reina",
                 "telephone": "610111111",
-                "email": "nazareth@gmail.com"
+                "email": "maria@gmail.com"
             }
         }]
     }
