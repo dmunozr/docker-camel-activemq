@@ -20,7 +20,7 @@ public class ImgFinderProducer extends DefaultProducer {
 
     @Override
     public void process(final Exchange exchange) throws IOException, InterruptedException {
-        final String headerName = endpoint.getHeaderContainingQuery();
+        final String headerName = endpoint.getConfiguration().getHeaderContainingQuery();
         final String query = (String) exchange.getIn().getHeader(headerName);
         final String result = YahooSearchUtil.searchImage(query);
         exchange.getOut().setHeader(RESULT_HEADER_NAME, result);

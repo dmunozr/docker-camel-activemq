@@ -37,7 +37,7 @@ public class ProcessRequestsProcessedAndLogThemRoute extends RouteBuilder {
             .routeId(ROUTE_ID)
             .filter().method(carBrandFilter, "filter")
             .process(addCarInformationAsHeaderProcessor)
-            .to("imgfinder:foo?headerContainingQuery=" + QUERY_HEADER_NAME)
+            .to("imgfinder:search?headerContainingQuery=" + QUERY_HEADER_NAME)
             .process(injectImageUrlProcessor)
             .log("Request processed successfully by " + containerName + ": ${body}");
     }

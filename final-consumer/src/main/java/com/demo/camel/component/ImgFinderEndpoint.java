@@ -7,11 +7,13 @@ import org.apache.camel.impl.DefaultEndpoint;
 import org.apache.camel.spi.UriEndpoint;
 import org.apache.camel.spi.UriParam;
 
-@UriEndpoint(scheme = "imgfinder", syntax = "imgfinder", title = "Image finder by Yahoo search.")
+@UriEndpoint(scheme = "imgfinder", syntax = "imgfinder://operationPath", title = "Image finder by Yahoo search.")
 public class ImgFinderEndpoint extends DefaultEndpoint {
 
+    private String operationPath;
+
     @UriParam
-    private String headerContainingQuery;
+    private ImgFinderConfiguration configuration;
 
     public ImgFinderEndpoint() {
     }
@@ -35,11 +37,19 @@ public class ImgFinderEndpoint extends DefaultEndpoint {
         return true;
     }
 
-    public String getHeaderContainingQuery() {
-        return headerContainingQuery;
+    public String getOperationPath() {
+        return operationPath;
     }
 
-    public void setHeaderContainingQuery(final String headerContainingQuery) {
-        this.headerContainingQuery = headerContainingQuery;
+    public void setOperationPath(final String operationPath) {
+        this.operationPath = operationPath;
+    }
+
+    public ImgFinderConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(final ImgFinderConfiguration configuration) {
+        this.configuration = configuration;
     }
 }
