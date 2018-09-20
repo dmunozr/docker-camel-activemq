@@ -2,7 +2,7 @@ package com.demo.camel.component;
 
 import static com.demo.camel.component.ImgFinderConstants.RESULT_HEADER_NAME;
 
-import com.demo.util.YahooSearchUtil;
+import com.demo.util.WebSearchUtil;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
@@ -28,7 +28,7 @@ public class ImgFinderConsumer extends ScheduledPollConsumer {
             queryResult = "https://www.coches.com/fotos_historicas/peugeot/5008-GT-2016/high_peugeot_5008-gt-2016_r7.jpg";
         } else {
             final String query = (String) exchange.getIn().getHeader(headerContainingQuery);
-            queryResult = YahooSearchUtil.searchImage(query);
+            queryResult = WebSearchUtil.searchImage(query);
         }
         exchange.getOut().setHeader(RESULT_HEADER_NAME, queryResult);
         exchange.getIn().setBody("An image url was stored in the header " + RESULT_HEADER_NAME);

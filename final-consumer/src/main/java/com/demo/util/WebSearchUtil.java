@@ -12,18 +12,18 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class YahooSearchUtil {
+public class WebSearchUtil {
 
-    private static final Logger LOG = LoggerFactory.getLogger(YahooSearchUtil.class);
+    private static final Logger LOG = LoggerFactory.getLogger(WebSearchUtil.class);
 
     private static final short MAX_ATTEMPTS = 10;
 
-    private static final String YAHOO_SEARCH_IMAGE_URL_MASK = "https://es.images.search.yahoo.com/search/images?p=%s";
+    private static final String DOG_PILE_SEARCH_IMAGE_URL_MASK = "http://results.dogpile.com/serp?qc=images&q=%s";
 
     private static final Map<String, String> RESULTS_CACHE = new HashMap<>();
 
     /**
-     * This waiting time is required due to the Yahoo endpoint returns no results for just same queries invoked pretty much at the same time.
+     * This waiting time is required due to the DogPile endpoint returns no results for just same queries invoked pretty much at the same time.
      */
     private static final long PERIOD_OF_TIME_BETWEEN_ATTEMPTS = 5000;
 
@@ -48,21 +48,20 @@ public class YahooSearchUtil {
     }
 
     private static String internalSearchImage(final String query) throws IOException {
-        final String searchURL = String.format(YAHOO_SEARCH_IMAGE_URL_MASK, query);
+        final String searchURL = String.format(DOG_PILE_SEARCH_IMAGE_URL_MASK, query);
         final Document doc = Jsoup.connect(searchURL).userAgent("Mozilla/5.0").get();
-        final Elements results = doc.select("img.process");
+        final Elements results = doc.select("a.link");
 
         String imageUrl = null;
         for (final Element result : results) {
-            imageUrl = result.attr("data-src");
+            imageUrl = result.attr("href");
             LOG.debug("Image url found: {}", imageUrl);
             break;
         }
         if (imageUrl == null) {
-            LOG.warn("No image was found for the search: {}", query);
+            LOG.warn("No image was found for the search: {}", searchURL);
         }
 
         return imageUrl;
     }
 }
-
