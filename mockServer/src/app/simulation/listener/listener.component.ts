@@ -1,6 +1,12 @@
-import {Component} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { SimulationMessageResponse } from '../model/simulation-message-response.model';
+import { interval, Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators'
+import { Store } from '@ngrx/store';
+
+import * as fromApp from '../../store/app.reducers';
+import * as SimulationActions from '../store/simulation.actions';
 
 @Component({
   selector: 'app-listener',
@@ -14,10 +20,31 @@ import { SimulationMessageResponse } from '../model/simulation-message-response.
     ]),
   ],
 })
-export class ListenerComponent {
-  dataSource = ELEMENT_DATA;
+export class ListenerComponent implements OnInit, OnDestroy {
+
+  dataSource: Observable<SimulationMessageResponse[]>;
   columnsToDisplay = ['Car Info', 'Client Info', 'Additional Info', 'Image'];
   expandedElement: SimulationMessageResponse;
+  timer: Observable<any>;
+  timerSubscription: Subscription;
+
+  constructor(private store: Store<fromApp.AppState>) {
+  }
+
+  ngOnInit() {
+    this.dataSource = this.store.select('simulations');
+
+    this.timer = interval(2000);
+    this.timerSubscription = this.timer.subscribe( 
+      () => {
+        this.store.dispatch(new SimulationActions.ReceiveSimulationMessages());
+    });
+  }
+
+  ngOnDestroy() {
+    this.timerSubscription.unsubscribe();
+  }  
+
 }
 
 const ELEMENT_DATA: SimulationMessageResponse[] = [

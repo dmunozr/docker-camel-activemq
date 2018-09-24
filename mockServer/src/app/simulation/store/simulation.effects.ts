@@ -7,6 +7,7 @@ import {Store} from '@ngrx/store';
 import * as SimulationActions from './simulation.actions';
 import { SimulationMessagesResponse } from '../model/simulation-messages-response.model';
 import * as fromSimulation from './simulation.reducers';
+import { SimulationMessageResponse } from '../model/simulation-message-response.model';
 
 @Injectable()
 export class SimulationEffects {
@@ -16,7 +17,7 @@ export class SimulationEffects {
 
     constructor(private actions$: Actions,
       private httpClient: HttpClient,
-      private store: Store<fromSimulation.FeatureState>) {
+      private store: Store<SimulationMessageResponse[]>) {
     }
 
     @Effect({dispatch: false})
@@ -35,29 +36,23 @@ export class SimulationEffects {
             return this.httpClient.request(req);
         }));
 
-/*
+
     @Effect()
-  recipeFetch = this.actions$
-    .ofType(SimulationActions.FETCH_RECIPES)
-    .pipe(switchMap((action: RecipeActions.FetchRecipes) => {
-      return this.httpClient.get<Recipe[]>('https://ng-recipe-book-3adbb.firebaseio.com/recipes.json', {
-        observe: 'body',
-        responseType: 'json'
-      });
-    }), map(
-      (recipes) => {
-        console.log(recipes);
-        for (let recipe of recipes) {
-          if (!recipe['ingredients']) {
-            recipe['ingredients'] = [];
-          }
+    simulationFetch = this.actions$
+      .ofType(SimulationActions.RECEIVE_SIMULATION_MESSAGES)
+      .pipe(switchMap((action: SimulationActions.ReceiveSimulationMessages) => {
+        return this.httpClient.get<SimulationMessagesResponse>(this.messagesEndpoint, {
+          observe: 'body',
+          responseType: 'json'
+        });
+      }), map(
+        (simulationMessagesResponse) => {
+          //console.log(simulationMessagesResponse);
+          return {
+            type: SimulationActions.APPEND_SIMULATION_MESSAGES,
+            payload: simulationMessagesResponse
+          };
         }
-        return {
-          type: RecipeActions.SET_RECIPES,
-          payload: recipes
-        };
-      }
-    ));
-*/
+      ));
 
 }

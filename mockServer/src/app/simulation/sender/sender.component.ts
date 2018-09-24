@@ -17,6 +17,7 @@ import { Client } from '../model/client.model';
 export class SenderComponent implements OnInit {
 
   sendForm: FormGroup;
+  carBrands: string[] = this.getCarBrands();
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -25,6 +26,10 @@ export class SenderComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+  }
+
+  getCarBrands(){
+    return [ '', 'Alfa Romeo', 'Aston Martin', 'Audi', 'Austin', 'Bentley', 'BMW', 'Cadillac', 'Chevrolet', 'Chrysler', 'Citroen', 'Dacia', 'Daewoo', 'Daihatsu', 'Dodge', 'Ferrari', 'Fiat', 'Ford', 'Galloper', 'Honda', 'Hummer', 'Hyundai', 'Infiniti', 'Isuzu', 'Jaguar', 'Jeep', 'Kia', 'Lada', 'Lamborghini', 'Lancia', 'Land-Rover', 'Lexus', 'Lotus', 'Maserati', 'Mazda', 'Mercedes', 'MG', 'Mini', 'Mitsubishi', 'Nissan', 'Opel', 'Peugeot', 'Pontiac', 'Porsche', 'Renault', 'Rolls-Royce', 'Rover', 'Saab', 'Seat', 'Skoda', 'Smart', 'Ssangyong', 'Subaru', 'Suzuki', 'Talbot', 'Tata', 'Toyota', 'Volkswagen', 'Volvo' ];
   }
 
   onSubmit(){
@@ -69,4 +74,11 @@ export class SenderComponent implements OnInit {
     });
 
   }
+
+  onChange() {    
+    this.sendForm.controls.model.reset();
+    this.sendForm.controls.version.reset();
+    this.sendForm.controls.year.reset();
+  }
+
 }

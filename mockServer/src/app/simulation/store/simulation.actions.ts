@@ -4,7 +4,8 @@ import { SimulationMessagesResponse } from '../model/simulation-messages-respons
 
 
 export const SEND_SIMULATION_REQUEST = 'SEND_SIMULATION_REQUEST';
-export const APPEND_SIMULATION_MESSAGES_RESPONSE = 'APPEND_SIMULATION_MESSAGES_RESPONSE';
+export const RECEIVE_SIMULATION_MESSAGES = 'RECEIVE_SIMULATION_MESSAGES';
+export const APPEND_SIMULATION_MESSAGES = 'APPEND_SIMULATION_MESSAGES';
 
 export class SendSimulation implements Action {
     readonly type = SEND_SIMULATION_REQUEST;
@@ -12,10 +13,16 @@ export class SendSimulation implements Action {
     constructor(public payload: SimulationRequest) {}
 }
   
-export class AppendSimulationMessagesResponse implements Action {
-  readonly type = APPEND_SIMULATION_MESSAGES_RESPONSE;
+export class ReceiveSimulationMessages implements Action {
+  readonly type = RECEIVE_SIMULATION_MESSAGES;
+
+  constructor() {}
+}
+
+export class AppendSimulationMessages implements Action {
+  readonly type = APPEND_SIMULATION_MESSAGES;
 
   constructor(public payload: SimulationMessagesResponse) {}
 }
 
-export type SimulationActions = SendSimulation | AppendSimulationMessagesResponse;
+export type SimulationActions = SendSimulation | ReceiveSimulationMessages | AppendSimulationMessages;

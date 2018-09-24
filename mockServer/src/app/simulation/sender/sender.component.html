@@ -24,14 +24,11 @@
             <div class="col-xs-10">
               <div class="form-group">
                 <label for="brand">Brand</label>
-                <input
-                  type="text"
-                  id="brand"
-                  placeholder="Mercedes, BMW, Audi, ..."
-                  formControlName="brand"
-                  class="form-control">
+                <select class="form-control" formControlName="brand" (change)="onChange();">
+                    <option *ngFor="let brand of carBrands" [ngValue]="brand">{{ brand }}</option>
+                </select>
                 <div *ngIf="sendForm.get('brand').touched && sendForm.get('brand').hasError('required')">
-                    <p class="validationErrorMessage">Please provide a brand!</p>
+                    <p class="validationErrorMessage">Please select a brand!</p>
                 </div>              
               </div>
             </div>
