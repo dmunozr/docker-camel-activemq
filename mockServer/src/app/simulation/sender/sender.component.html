@@ -1,0 +1,156 @@
+<div class="row">
+  <div class="col-xs-12">    
+    <form [formGroup]="sendForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-4">
+          <h3>Car request details</h3>
+          <div class="form-group">
+            <label for="sponsor">Sponsor</label>
+            <input
+              type="text"
+              id="sponsor"
+              placeholder="www.coches.net, www.autoscout24.es, ..."
+              formControlName="sponsor"
+              class="form-control">
+            <div *ngIf="sendForm.get('sponsor').touched && sendForm.get('sponsor').hasError('required')">
+                <p class="validationErrorMessage">Please provide a sponsor name!</p>
+            </div>              
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="form-group">
+            <label for="brand">Brand</label>
+            <input
+              type="text"
+              id="brand"
+              placeholder="Mercedes, BMW, Audi, ..."
+              formControlName="brand"
+              class="form-control">
+            <div *ngIf="sendForm.get('brand').touched && sendForm.get('brand').hasError('required')">
+                <p class="validationErrorMessage">Please provide a brand!</p>
+            </div>              
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="form-group">
+            <label for="model">Model</label>
+            <input
+              type="text"
+              id="model"
+              placeholder="GLC, 320d, Q7, ..."
+              formControlName="model"
+              class="form-control">
+            <div *ngIf="sendForm.get('model').touched && sendForm.get('model').hasError('required')">
+                <p class="validationErrorMessage">Please provide a model!</p>
+            </div>              
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="form-group">
+            <label for="version">Version</label>
+            <input
+              type="text"
+              id="version"
+              placeholder="Coupe, Sportback, ..."
+              formControlName="version"
+              class="form-control">
+          </div>    
+        </div>    
+        <div class="col-xs-2">
+          <div class="form-group">
+            <label for="year">Year</label>
+            <input
+              type="number"
+              id="year"
+              formControlName="year"
+              class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4">
+          <hr>      
+        </div>
+      </div>
+      <h3>Client information</h3>
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input
+              type="text"
+              id="firstName"
+              formControlName="firstName"
+              class="form-control">
+            <div *ngIf="sendForm.get('firstName').touched && sendForm.get('firstName').hasError('required')">
+                <p class="validationErrorMessage">Please provide a first name!</p>
+            </div>              
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input
+              type="text"
+              id="lastName"
+              formControlName="lastName"
+              class="form-control">
+            <div *ngIf="sendForm.get('lastName').touched && sendForm.get('lastName').hasError('required')">
+                <p class="validationErrorMessage">Please provide a last name!</p>
+            </div>              
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="form-group">
+            <label for="telephone">Telephone</label>
+            <input
+              type="text"
+              id="telephone"
+              formControlName="telephone"
+              class="form-control">
+            <div *ngIf="sendForm.get('telephone').touched && sendForm.get('telephone').hasError('required')">
+                <p class="validationErrorMessage">Please provide a telephone!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="text"
+              id="email"
+              formControlName="email"
+              class="form-control">
+            <div *ngIf="sendForm.get('email').touched && sendForm.get('email').hasError('required')">
+                <p class="validationErrorMessage">Please provide a email!</p>
+            </div>              
+          </div>
+        </div>
+      </div>
+        
+      <div class="row">
+        <div class="col-xs-4" >
+          <div style="float:right;">
+            <button
+              type="submit"
+              class="btn btn-success"              
+              [disabled]="!sendForm.valid">Save</button>
+            <button type="button" class="btn btn-danger" style="margin-left: 10px;" (click)="onCancel()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
