@@ -5,7 +5,7 @@ import { tap } from 'rxjs/operators';
 import * as NotificationActions from './notification.actions';
 import { NotificationsService } from '../notifications.service';
 
-const TIME_TO_SHOW_NOTIFICATION: number = 3000;
+const TIME_TO_SHOW_NOTIFICATION: number = 2000;
 
 @Injectable()
 export class NotificationEffects {

@@ -12,7 +12,8 @@ services:
       - "61613"
   producer:
     container_name: producer
-    image: dmunozr/camel-activemq-producer:latest
+    build:
+      context: ./producer
     ports:
       - "8080:8080"
       - "5005:5005"
@@ -42,3 +43,12 @@ services:
     depends_on:
       activemq:
         condition: service_started
+  mock-server:
+    container_name: mock-server
+    build:
+      context: ./mock-server
+    volumes:
+      - './mock-server:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - '4200:4200'

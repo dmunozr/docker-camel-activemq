@@ -75,3 +75,12 @@ services:
     depends_on:
       activemq:
         condition: service_started
+  mock-server:
+    container_name: mock-server
+    build:
+      context: ./mock-server
+    volumes:
+      - './mock-server:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - '4200:4200'

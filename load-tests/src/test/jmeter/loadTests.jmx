@@ -109,7 +109,7 @@
 				&quot;brand&quot;: &quot;Peugeot&quot;,&#xd;
 				&quot;model&quot;: &quot;5008&quot;,&#xd;
 				&quot;version&quot;: &quot;GT Line&quot;,&#xd;
-				&quot;year&quot;: &quot;2017&quot;&#xd;
+				&quot;year&quot;: 2017&#xd;
 			},&#xd;
 			&quot;client&quot;: {&#xd;
 				&quot;firstName&quot;: &quot;Daniel&quot;,&#xd;
@@ -123,7 +123,7 @@
 				&quot;brand&quot;: &quot;Ford&quot;,&#xd;
 				&quot;model&quot;: &quot;Focus&quot;,&#xd;
 				&quot;version&quot;: &quot;Inspire&quot;,&#xd;
-				&quot;year&quot;: &quot;2012&quot;&#xd;
+				&quot;year&quot;: 2012&#xd;
 			},&#xd;
 			&quot;client&quot;: {&#xd;
 				&quot;firstName&quot;: &quot;Maria&quot;,&#xd;
