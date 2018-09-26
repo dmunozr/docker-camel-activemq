@@ -1,0 +1,5 @@
+<div class="notifications">
+    <div class="alert-{{notification.type}} notification" *ngFor="let notification of notifications | async">
+        <p>{{ notification.message }}</p>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
@@ -17,6 +18,9 @@ import { ListenerComponent } from './simulation/listener/listener.component';
 import { reducers } from './store/app.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { SimulationEffects } from './simulation/store/simulation.effects';
+import { NotificationEffects } from './notifications/store/notification.effects';
+import { ErrorInterceptor } from './interceptor/error.interceptor';
+
 import {
   MatAutocompleteModule,
   MatBadgeModule,
@@ -56,6 +60,7 @@ import {
 } from '@angular/material';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 @NgModule({
   exports: [
@@ -96,7 +101,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-  ]
+  ],
+  declarations: []
 })
 export class DemoMaterialModule {}
 
@@ -108,7 +114,8 @@ export class DemoMaterialModule {}
     HeaderComponent,
     SimulationComponent,
     SenderComponent,
-    ListenerComponent 
+    ListenerComponent,
+    NotificationsComponent    
   ],
   exports: [
     CommonModule    
@@ -120,11 +127,13 @@ export class DemoMaterialModule {}
     AppRoutingModule,
     ReactiveFormsModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([SimulationEffects]),
+    EffectsModule.forRoot([SimulationEffects, NotificationEffects]),
     DemoMaterialModule,
-    BrowserAnimationsModule    
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
