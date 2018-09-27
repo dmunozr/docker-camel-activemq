@@ -1,3 +1,12 @@
+<div>
+  <h3 style="float:left;">Messages processed</h3> 
+  <img src="assets/img/info-icon.png" style="width: 24px;" (click)="showBrandsInfo()"/>
+</div>
+<div style="clear:left;margin: 50px 0 20px 0;">
+  <p>
+    The following messages have been processed successfully by the whole platform <i>(producer -> consumer -> final-consumer)</i>:
+  </p>
+</div>
 <table mat-table
        [dataSource]="dataSource" multiTemplateDataRows
        class="mat-elevation-z8">

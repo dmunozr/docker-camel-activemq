@@ -12,8 +12,7 @@ services:
       - "61613"
   producer:
     container_name: producer
-    build:
-      context: ./producer
+    image: dmunozr/camel-activemq-producer:latest
     ports:
       - "8080:8080"
       - "5005:5005"

@@ -44,4 +44,7 @@ export class ListenerComponent implements OnInit, OnDestroy {
     this.timerSubscription.unsubscribe();
   }  
 
+  showBrandsInfo(){
+    alert("Only the messages containing the brand 'Peugeot' and 'Ford' are processed by the 'final-consumer' application. \nTherefore, if you select another brand, the message will be rejected and it will not appear in the list below.");
+  }
 }

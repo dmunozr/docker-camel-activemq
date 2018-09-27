@@ -8,14 +8,11 @@
               <h3>Car request details</h3>
               <div class="form-group">
                 <label for="sponsor">Sponsor</label>
-                <input
-                  type="text"
-                  id="sponsor"
-                  placeholder="www.coches.net, www.autoscout24.es, ..."
-                  formControlName="sponsor"
-                  class="form-control">
+                <select class="form-control" formControlName="sponsor">
+                    <option *ngFor="let sponsor of sponsors" [ngValue]="sponsor">{{ sponsor }}</option>
+                </select>
                 <div *ngIf="sendForm.get('sponsor').touched && sendForm.get('sponsor').hasError('required')">
-                    <p class="validationErrorMessage">Please provide a sponsor name!</p>
+                  <p class="validationErrorMessage">Please provide a sponsor name!</p>
                 </div>              
               </div>
             </div>
@@ -24,7 +21,7 @@
             <div class="col-xs-10">
               <div class="form-group">
                 <label for="brand">Brand</label>
-                <select class="form-control" formControlName="brand" (change)="onChange();">
+                <select class="form-control" formControlName="brand" (change)="onChangeBrand();">
                     <option *ngFor="let brand of carBrands" [ngValue]="brand">{{ brand }}</option>
                 </select>
                 <div *ngIf="sendForm.get('brand').touched && sendForm.get('brand').hasError('required')">
@@ -138,15 +135,38 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-11" >
-            <br/>
-            <div style="float:right;">
-            <button
-              type="submit"
-              class="btn btn-success"              
-              [disabled]="!sendForm.valid">Save</button>
-            <button type="button" class="btn btn-danger" style="margin-left: 10px;" (click)="onCancel()">Cancel</button>
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-4">
+              <div class="form-group">
+                <label for="brand">Samples:</label>
+                <select class="form-control" formControlName="sample" >
+                    <option *ngFor="let sample of samples" ng-init="sample = samples[0]" [ngValue]="sample">{{ sample.car.brand }} - {{ sample.car.model }} - {{ sample.car.version }} - {{ sample.car.year }}</option>
+                </select>
+              </div>
+            </div>
+            <span class="col-xs-8">
+              <button
+                type="button"
+                class="btn btn-success"
+                style="margin: 4% 10% 0 0;"              
+                (click)="onLoadSample()">Load Sample</button>
+              <span>
+                <button 
+                  type="button" 
+                  class="btn btn-danger" 
+                  style="float:right;margin: 4% 10% 0 0"
+                  (click)="onCancel()">Reset</button>
+                <button
+                  type="submit"
+                  class="btn btn-success"
+                  style="float:right;margin-right: 3%;margin-top: 4%;"
+                  [disabled]="!sendForm.valid">Save</button>
+              </span>    
+            </span>    
           </div>
+          <b *ngIf="sendForm.controls.sample?.value !== null">To be loaded:</b>
+          <p><em>{{ (sendForm.controls.sample?.value !== null)? (sendForm.controls.sample?.value | json) : '' }}</em></p>
         </div>
       </div>
     </form>
