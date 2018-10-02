@@ -1,0 +1,174 @@
+<div class="row">
+  <div class="col-xs-12">    
+    <form [formGroup]="sendForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="row">
+            <div class="col-xs-10">
+              <h3>Car request details</h3>
+              <div class="form-group">
+                <label for="sponsor">Sponsor</label>
+                <select class="form-control" formControlName="sponsor">
+                    <option *ngFor="let sponsor of sponsors" [ngValue]="sponsor">{{ sponsor }}</option>
+                </select>
+                <div *ngIf="sendForm.get('sponsor').touched && sendForm.get('sponsor').hasError('required')">
+                  <p class="validationErrorMessage">Please provide a sponsor name!</p>
+                </div>              
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-10">
+              <div class="form-group">
+                <label for="brand">Brand</label>
+                <select class="form-control" formControlName="brand" (change)="onChangeBrand();">
+                    <option *ngFor="let brand of carBrands" [ngValue]="brand">{{ brand }}</option>
+                </select>
+                <div *ngIf="sendForm.get('brand').touched && sendForm.get('brand').hasError('required')">
+                    <p class="validationErrorMessage">Please select a brand!</p>
+                </div>              
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-10">
+              <div class="form-group">
+                <label for="model">Model</label>
+                <input
+                  type="text"
+                  id="model"
+                  placeholder="GLC, 320d, Q7, ..."
+                  formControlName="model"
+                  class="form-control">
+                <div *ngIf="sendForm.get('model').touched && sendForm.get('model').hasError('required')">
+                    <p class="validationErrorMessage">Please provide a model!</p>
+                </div>              
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-7">
+              <div class="form-group">
+                <label for="version">Version</label>
+                <input
+                  type="text"
+                  id="version"
+                  placeholder="Coupe, Sportback, ..."
+                  formControlName="version"
+                  class="form-control">
+              </div>    
+            </div>    
+            <div class="col-xs-3">
+              <div class="form-group">
+                <label for="year">Year</label>
+                <input
+                  type="number"
+                  id="year"
+                  formControlName="year"
+                  class="form-control">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <h3>Client information</h3>
+          <div class="row">
+            <div class="col-xs-10">
+              <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input
+                  type="text"
+                  id="firstName"
+                  formControlName="firstName"
+                  class="form-control">
+                <div *ngIf="sendForm.get('firstName').touched && sendForm.get('firstName').hasError('required')">
+                    <p class="validationErrorMessage">Please provide a first name!</p>
+                </div>              
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-10">
+              <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  formControlName="lastName"
+                  class="form-control">
+                <div *ngIf="sendForm.get('lastName').touched && sendForm.get('lastName').hasError('required')">
+                    <p class="validationErrorMessage">Please provide a last name!</p>
+                </div>              
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-5">
+              <div class="form-group">
+                <label for="telephone">Telephone</label>
+                <input
+                  type="text"
+                  id="telephone"
+                  formControlName="telephone"
+                  class="form-control">
+                <div *ngIf="sendForm.get('telephone').touched && sendForm.get('telephone').hasError('required')">
+                    <p class="validationErrorMessage">Please provide a telephone!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-10">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="text"
+                  id="email"
+                  formControlName="email"
+                  class="form-control">
+                <div *ngIf="sendForm.get('email').touched && sendForm.get('email').hasError('required')">
+                    <p class="validationErrorMessage">Please provide a email!</p>
+                </div>              
+              </div>
+            </div>
+          </div>        
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-4">
+              <div class="form-group">
+                <label for="brand">Samples:</label>
+                <select class="form-control" formControlName="sample" >
+                    <option *ngFor="let sample of samples" ng-init="sample = samples[0]" [ngValue]="sample">{{ sample.car.brand }} - {{ sample.car.model }} - {{ sample.car.version }} - {{ sample.car.year }}</option>
+                </select>
+              </div>
+            </div>
+            <span class="col-xs-8">
+              <button
+                type="button"
+                class="btn btn-success"
+                style="margin: 4% 10% 0 0;"              
+                (click)="onLoadSample()">Load Sample</button>
+              <span>
+                <button 
+                  type="button" 
+                  class="btn btn-danger" 
+                  style="float:right;margin: 4% 10% 0 0"
+                  (click)="onCancel()">Reset</button>
+                <button
+                  type="submit"
+                  class="btn btn-success"
+                  style="float:right;margin-right: 3%;margin-top: 4%;"
+                  [disabled]="!sendForm.valid">Save</button>
+              </span>    
+            </span>    
+          </div>
+          <b *ngIf="sendForm.controls.sample?.value !== null">To be loaded:</b>
+          <p><em>{{ (sendForm.controls.sample?.value !== null)? (sendForm.controls.sample?.value | json) : '' }}</em></p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

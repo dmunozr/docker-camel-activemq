@@ -2,7 +2,7 @@ version: '2.1'
 services:
   activemq:
     container_name: activemq
-    image: webcenter/activemq:latest
+    image: webcenter/activemq:5.14.3
     ports:
       - "8161:8161"
       - "61616:61616"
@@ -12,7 +12,7 @@ services:
       - "61613"
   producer:
     container_name: producer
-    image: dmunozr/camel-activemq-producer:latest
+    image: dmunozr/camel-activemq-producer:1.0.0
     ports:
       - "8080:8080"
       - "5005:5005"
@@ -42,3 +42,12 @@ services:
     depends_on:
       activemq:
         condition: service_started
+  mock-server:
+    container_name: mock-server
+    build:
+      context: ./mock-server
+    volumes:
+      - './mock-server:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - '4200:4200'

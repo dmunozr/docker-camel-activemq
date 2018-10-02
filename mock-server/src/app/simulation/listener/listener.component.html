@@ -1,0 +1,61 @@
+<div>
+  <h3 style="float:left;">Messages processed</h3> 
+  <img src="assets/img/info-icon.png" style="width: 24px;" (click)="showBrandsInfo()"/>
+</div>
+<div style="clear:left;margin: 50px 0 20px 0;">
+  <p>
+    The following messages have been processed successfully by the whole platform <i>(producer -> consumer -> final-consumer)</i>:
+  </p>
+</div>
+<table mat-table
+       [dataSource]="dataSource" multiTemplateDataRows
+       class="mat-elevation-z8">
+  <ng-container matColumnDef="{{ column }}" *ngFor="let column of columnsToDisplay">
+    <th mat-header-cell *matHeaderCellDef style="background-color: aliceblue;">{{ column }}</th>
+    <td mat-cell *matCellDef="let element">
+      <div *ngIf="column === 'Car Info'">
+        <span class='infoDetail'>Brand: </span>{{ element.car.brand }} <br/>
+        <span class='infoDetail'>Model: </span>{{ element.car.model }} <br/>
+        <span class='infoDetail'>Version: </span>{{ element.car.version }} <br/>
+        <span class='infoDetail'>Year: </span>{{ element.car.year }}
+      </div>
+      <div *ngIf="column === 'Client Info'">
+          <span class='infoDetail'>First Name: </span>{{ element.client.firstName }} <br/>
+          <span class='infoDetail'>Last Name: </span>{{ element.client.lastName }} <br/>
+          <span class='infoDetail'>Telephone: </span>{{ element.client.telephone }} <br/>
+          <span class='infoDetail'>Email: </span>{{ element.client.email }}
+      </div>
+      <div *ngIf="column === 'Additional Info'">
+          <span class='infoDetail'>Price (&euro;): </span>{{ element.additionalInfo.minPrice | number:'1.1-2' }} - {{ element.additionalInfo.maxPrice | number:'1.1-2' }} <br/>
+          <span class='infoDetail'>Availability: </span>{{ element.additionalInfo.availability }} <br/>
+      </div>
+      <div *ngIf="column === 'Image'">
+        <p *ngIf="element.car.imageUrl === null" class='infoDetail'>
+          Image not available
+        </p>        
+        <p *ngIf="element.car.imageUrl !== null" class='imageLink'>
+          Click here to expand the image
+        </p>        
+      </div>
+    </td>
+  </ng-container>
+
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+      <div class="example-element-detail"
+           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+        <img *ngIf="element.car.imageUrl !== null" class='carImage' [src]="element.car.imageUrl" >
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = element">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
+<br>

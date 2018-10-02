@@ -1,0 +1,11 @@
+.notifications {
+    position: fixed;
+    top: 60px;
+    max-width: 250px;
+}
+.notification {
+    padding: 10px;
+    margin-bottom:2px;
+    border: 1px solid #ccc!important;
+    border-radius: 10px;
+}

@@ -5,6 +5,7 @@ import static com.demo.camel.processor.AddCarInformationAsHeaderProcessor.QUERY_
 import com.demo.camel.filter.CarBrandFilter;
 import com.demo.camel.processor.AddCarInformationAsHeaderProcessor;
 import com.demo.camel.processor.InjectImageUrlProcessor;
+import com.demo.camel.processor.StoreMessagesProcessor;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class ProcessRequestsProcessedAndLogThemRoute extends RouteBuilder {
     @Autowired
     private InjectImageUrlProcessor injectImageUrlProcessor;
 
+    @Autowired
+    private StoreMessagesProcessor storeMessagesProcessor;
+
     @Override
     public void configure() {
         from("activemq:topic:" + requestsProcessedTopicName)
@@ -39,6 +43,7 @@ public class ProcessRequestsProcessedAndLogThemRoute extends RouteBuilder {
             .process(addCarInformationAsHeaderProcessor)
             .to("imgfinder:search?headerContainingQuery=" + QUERY_HEADER_NAME)
             .process(injectImageUrlProcessor)
+            .process(storeMessagesProcessor)
             .log("Request processed successfully by " + containerName + ": ${body}");
     }
 }
