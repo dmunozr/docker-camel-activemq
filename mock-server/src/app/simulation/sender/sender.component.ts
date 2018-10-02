@@ -52,7 +52,6 @@ export class SenderComponent implements OnInit {
 
   onCancel() {
     this.sendForm.reset();
-    //this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   private initForm() {

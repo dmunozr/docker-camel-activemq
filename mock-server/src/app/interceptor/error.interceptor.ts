@@ -12,31 +12,11 @@ import * as NotificationActions from '../notifications/store/notification.action
 export class ErrorInterceptor implements HttpInterceptor {
     constructor(private notificationStore: Store<Notification[]>) {}
 
-        /**
+    /**
      * @param HttpRequest<any> request - The intercepted request
      * @param HttpHandler next - The next interceptor in the pipeline
      * @return Observable<HttpEvent<any>>
      */
-    /*
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return next.handle(request)
-            .pipe(
-                catchError(
-                    (error: any, caught: Observable<HttpEvent<any>>) => {
-                        if (error.status === 401) {
-                            this.handleAuthError();
-                            // if you've caught / handled the error, you don't
-                            // want to rethrow it unless you also want
-                            // downstream consumers to have to handle it as
-                            // well.
-                            return of(error);
-                        }
-                        throw error;
-                    }
-                ),
-            );
-    }
-*/
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(req)
                 .pipe(
