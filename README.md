@@ -29,6 +29,8 @@ That being said, let's explain the four components which the architecture is bas
 
 ## [Angular 6 application](https://github.com/dmunozr/docker-camel-activemq/tree/master/mock-server)
 In order to make the use of this platform easier, an Angular 6 application has been created so the whole functionality can be tested quickly.
+Once deployed, it can be accessed at 'http://localhost:4200'. 
+
 As summary, throughout this small application you will find samples of the following Angular stuff:
 
 * Routing
